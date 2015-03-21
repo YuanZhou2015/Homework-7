@@ -2,13 +2,8 @@
 //
 
 #include "stdafx.h"
+#include "earthquake.h"
 
-
-/*int _tmain(int argc, _TCHAR* argv[])
-{
-	return 0;
-}
-  */
 #include <stdio.h>
 #include <iostream>
 #include <string>
