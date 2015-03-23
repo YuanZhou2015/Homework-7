@@ -83,7 +83,7 @@ void open_output(string outputfilename, ofstream &outputfile, stringstream &slog
     }
 }
 
-enum Months{
+/*enum Months{
     January = 1,
     February,
     March,
@@ -136,9 +136,9 @@ struct Date_format{
     string date;
     string month;
     string year;
-};
+};*/
 
-void set_date(string date, Date_format &Date, stringstream & slog){
+/*void set_date(string date, Date_format &Date, stringstream & slog){
     string sout;
     ofstream outputfile, logfile;
     if (date.size()!=10){
@@ -235,9 +235,9 @@ void set_date(string date, Date_format &Date, stringstream & slog){
     Date.month = month;
     Date.year = year;
     return;
-}
+}  */
 
-void set_time(string time, stringstream & slog){
+/*void set_time(string time, stringstream & slog){
     string sout;
     ofstream outputfile, logfile;
     if (time.size()!=12){
@@ -329,14 +329,14 @@ void set_timezone(string timezone, stringstream &slog){
         exit(0);
     }
     return;
-}
+}  */
 
-enum magnitude_type{ 
+/*enum magnitude_type{ 
     ML, 
     MS, 
     MB, 
     MW 
-};
+};  */
 
 // Useful function to convert a string to uppercase 
 
@@ -347,7 +347,7 @@ string uppercase (string &s){
     return result;
 }
 
-bool is_valid_magnitude (string s) {
+/*bool is_valid_magnitude (string s) {
     string ss = uppercase(s);
     return((ss == "ML")||(ss == "MS")||(ss == "MB")||(ss == "MW"));
 }
@@ -371,7 +371,7 @@ magnitude_type string_to_magnitude_type (string s){
     if (ss == "MB") return MB;
     if (ss == "MW") return MW;
     exit (EXIT_FAILURE);
-}
+}*/
 
 string itos(int i){
     stringstream s;
@@ -686,30 +686,12 @@ void set_orientation(string orientation,stringstream &slog,
     }
 }
 
-struct Earthquake{
-    string ID;
-    Date_format date;
-    string time;
-    string timezone;
-    string earthquake_name;
-    string epicenter;
-    magnitude_type magnitudetype;
-    float magnitude;    
-};
-
-struct Station {
-    Network_code NT;
-    string STN;
-    Band_type B;
-    Instrument_type I;
-    string O;
-};
 
 int main(){
     ifstream inputfile;
     ofstream logfile, outputfile;
     string inputfilename, logfilename, outputfilename;
-    string sout, date, information;
+    string sout, d, information;
     stringstream slog;
 
     int flag=0,F;
@@ -739,36 +721,30 @@ int main(){
     return 0;
    
     //Reading the header
-
-    Earthquake eqinfor;
-    inputfile >> eqinfor.ID;
-    inputfile >> date;
-    Date_format Date;
-    set_date(date,Date,slog);
-    inputfile >> eqinfor.time;
-    set_time(eqinfor.time,slog);
-    inputfile >> eqinfor.timezone;
-    set_timezone(eqinfor.timezone,slog);
-    getline(inputfile,eqinfor.earthquake_name);
-    getline(inputfile,eqinfor.earthquake_name);
+    string id,t,tz,eqname,magtype;
+    float magnitude;
+    earthquake eqinfor;
+    inputfile >> id;
+    eqinfor.set_ID(id);
+    inputfile >> d;
+    //Date_format Date;
+    eqinfor.set_date(d,slog);
+    inputfile >> t;
+    eqinfor.set_time(t,slog);
+    inputfile >> tz;
+    eqinfor.set_timezone(tz,slog);
+    getline(inputfile,eqname);
+    getline(inputfile,eqname);
+    eqinfor.set_earthquakename(eqname);
     double longitude,latitude,depth;
     inputfile >> longitude >> latitude >> depth;
     stringstream epicenter;
     epicenter << "(" << longitude << ", " << latitude << ", " << depth << ")\n";
-    string magnitude;
+    inputfile >> magtype;
+    eqinfor.set_magtype(magtype,slog);
     inputfile >> magnitude;
-    set_magnitude(magnitude,slog);
-    eqinfor.magnitudetype = string_to_magnitude_type(magnitude);
-    inputfile >> eqinfor.magnitude;
-    if (eqinfor.magnitude<0){
-        sout =  "Invalid magnitude value.\n";
-        slog << sout;
-        F = 2;
-        print(outputfile,logfile,slog.str(),sout,F);
-        flag = 1;
-        return 0;
-    }
-    eqinfor.epicenter = epicenter.str();
+    eqinfor.set_magnitude(magnitude, slog);
+    //eqinfor.epicenter = epicenter.str();
 
     // If the header read successfully, then open the output file.
     // Print the header information into output file.
@@ -781,19 +757,19 @@ int main(){
     F = 2;
     print(outputfile,logfile,slog.str(),sout,F);
     stringstream ss;
-    ss << "# " << Date.date <<' '<< Date.month << ' ' << Date.year <<' ';
-    ss << eqinfor.time << ' ' << eqinfor.timezone << ' ';
-    ss << eqinfor.magnitudetype << ' ' << eqinfor.magnitude << ' ';
-    ss << eqinfor.earthquake_name << "\n";
-    ss << "[" << eqinfor.ID <<"] ";
-    ss << eqinfor.epicenter;
+    ss << eqinfor.earthquake::get_date; 
+    ss << eqinfor.get_time << ' ' << eqinfor.get_timezone << ' ';
+    ss << eqinfor.get_magtype << ' ' << eqinfor.get_magnitude << ' ';
+    ss << eqinfor.get_eqname << "\n";
+    ss << "[" << eqinfor.get_ID <<"] ";
+    ss << eqinfor.get_epicenter;
     F = 1;
     print(outputfile,logfile,ss.str(),sout,F);
 
     // Reading the table of earthquake information. 
     // The number of valid information will not more than 300.
 
-    const int MAXSIZE = 300;
+    /*const int MAXSIZE = 300;
     Station Signaldata[MAXSIZE];
     int size = 0, i, a = 0, flag1 = 0,flag2 = 0,flag3 = 0,flag4 = 0,flag5 = 0;
     string networkcode, stationcode, typeofband, typeofinstru, orientation;
@@ -862,7 +838,7 @@ int main(){
     F = 2;
     sout = "\nFinished!\n";
     slog << sout;
-    print(outputfile,logfile,slog.str(),sout,F);
+    print(outputfile,logfile,slog.str(),sout,F); */
 
     return 0;
 }
