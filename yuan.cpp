@@ -3,6 +3,7 @@
 
 #include "stdafx.h"
 #include "earthquake.h"
+#include "station.h"
 
 #include <stdio.h>
 #include <iostream>
@@ -509,14 +510,14 @@ void set_stationcode(string stationcode,stringstream &slog,
         }
     }
     return;
-}
+}   */
 
-enum Band_type{
+/*enum Band_type{
     LONGPERIOD,
     SHORTPERIOD,
     BROADBAND
-};
-bool is_valid_typeofband (string s){
+}; */
+/*bool is_valid_typeofband (string s){
     string ss = uppercase(s);
     return((ss == "LONG-PERIOD")||(ss == "SHORT-PERIOD")||(ss == "BROADBAND"));
 }
@@ -768,35 +769,48 @@ int main(){
     // Reading the table of earthquake information. 
     // The number of valid information will not more than 300.
 
-    /*const int MAXSIZE = 300;
-    Station Signaldata[MAXSIZE];
+    const int MAXSIZE = 300;
+    station signal,Signaldata[MAXSIZE];
     int size = 0, i, a = 0, flag1 = 0,flag2 = 0,flag3 = 0,flag4 = 0,flag5 = 0;
-    string networkcode, stationcode, typeofband, typeofinstru, orientation;
+    string networkcode, stname, typeofband, typeofinstru, orientation,orien;
     for(i = 1;inputfile != NULL && size<MAXSIZE; i++){        
         inputfile >> networkcode;
         if(inputfile == NULL)
             break;
-        set_networkcode(networkcode,slog,ss,i,flag1);
-        inputfile >> stationcode;
-        set_stationcode(stationcode,slog,ss,i,flag2);
+        Signaldata[size].set_networkcode(networkcode,slog,ss,i,flag1);
+        inputfile >> stname;
+        Signaldata[size].set_stationname(stname,slog,ss,i,flag2);
         inputfile >> typeofband;
-        set_typeofband(typeofband,slog,ss,i,flag3);
+        Signaldata[size].set_typeofband(typeofband,slog,ss,i,flag3);
         inputfile >> typeofinstru;
-        set_typeofinstru(typeofinstru,slog,ss,i,flag4);
+        Signaldata[size].set_typeofinstru(typeofinstru,slog,ss,i,flag4);
         inputfile >> orientation;
+        Signaldata[size].set_orientation(orientation,slog,ss,i,flag5);
+        orien = Signaldata[size].get_orientation();
+       // yyyyyy++;
         int n = orientation.size(), j = 0;
-        set_orientation(orientation,slog,ss,i,flag5);
         if(flag1 == 0 && flag2 == 0 && flag3 == 0 && flag4 == 0 && flag5 == 0){
             while (j<n){
-                Signaldata[size].NT = string_to_NTcode(networkcode);
-                Signaldata[size].STN = stationcode;
-                Signaldata[size].B = string_to_bandtype(typeofband);
-                Signaldata[size].I = string_to_instrutype(typeofinstru);
-                Signaldata[size].O = orientation[j];
-                size++;
+                if (j>= 1){
+                     string nttemp = Signaldata[size-1].get_networkcode();
+                     Signaldata[size].get_networkcode() = nttemp;
+                     string nntemp = Signaldata[size-1].get_stationname();
+                     Signaldata[size].get_stationname() = nntemp;
+                     string btemp = Signaldata[size-1].get_bandtype();
+                     Signaldata[size].get_bandtype() = btemp;
+                }
+                else{
+                Signaldata[size].get_networkcode();
+                Signaldata[size].get_stationname();
+                Signaldata[size].get_bandtype();
+                Signaldata[size].get_instrutype();
+                Signaldata[size].get_orientation(orien, j);
+                }
+
+                //size++;
                 j++;
-                if (size == 300)
-                    break;
+                /*if (size == 300)
+                    break;   */
             }
         }
         if(flag1 != 0 || flag2 != 0 || flag3 != 0 || flag4 != 0 || flag5 != 0)
@@ -829,15 +843,15 @@ int main(){
     ss << itos(size) <<"\n";
     print(outputfile, logfile,ss.str(),sout,F);     
     for (int j = 0; j<size; j++){
-        ss << eqinfor.ID << "." << NTcode_to_string(Signaldata[j].NT) << "." << Signaldata[j].STN << "." 
-           << bandtype_to_string(Signaldata[j].B) << instrutype_to_string(Signaldata[j].I) << Signaldata[j].O <<"\n"; 
+        ss << eqinfor.get_ID() << "." << Signaldata[j].get_networkcode() << "." << Signaldata[j].get_stationname() << "." 
+           << Signaldata[j].get_bandtype() << Signaldata[j].get_instrutype();// << Signaldata[j].O <<"\n"; 
     }
     F = 1;
     print(outputfile,logfile,ss.str(),sout,F); 
     F = 2;
     sout = "\nFinished!\n";
     slog << sout;
-    print(outputfile,logfile,slog.str(),sout,F); */
+    print(outputfile,logfile,slog.str(),sout,F);      
 
     return 0;
 }
