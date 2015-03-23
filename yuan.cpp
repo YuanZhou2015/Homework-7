@@ -379,7 +379,7 @@ string itos(int i){
     return s.str();
 }
 
-enum Network_code{
+/*enum Network_code{
     CE,
     CI,
     FA,
@@ -685,7 +685,7 @@ void set_orientation(string orientation,stringstream &slog,
         }
     }
 }
-
+ */
 
 int main(){
     ifstream inputfile;
@@ -693,7 +693,6 @@ int main(){
     string inputfilename, logfilename, outputfilename;
     string sout, d, information;
     stringstream slog;
-
     int flag=0,F;
     open_log("yuan.log",logfile);
     logfile.close();
@@ -757,12 +756,12 @@ int main(){
     F = 2;
     print(outputfile,logfile,slog.str(),sout,F);
     stringstream ss;
-    ss << eqinfor.earthquake::get_date; 
-    ss << eqinfor.get_time << ' ' << eqinfor.get_timezone << ' ';
-    ss << eqinfor.get_magtype << ' ' << eqinfor.get_magnitude << ' ';
-    ss << eqinfor.get_eqname << "\n";
-    ss << "[" << eqinfor.get_ID <<"] ";
-    ss << eqinfor.get_epicenter;
+    ss << eqinfor.get_date(); 
+    ss << eqinfor.get_time ()<< ' ' << eqinfor.get_timezone() << ' ';
+    ss << eqinfor.get_magtype() << ' ' << eqinfor.get_magnitude() << ' ';
+    ss << eqinfor.get_eqname() << "\n";
+    ss << "[" << eqinfor.get_ID() <<"] ";
+    ss << eqinfor.get_epicenter();
     F = 1;
     print(outputfile,logfile,ss.str(),sout,F);
 
