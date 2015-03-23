@@ -28,9 +28,9 @@ public:
     string get_time(){return time;}
     void set_timezone(string timezone, stringstream &slog);
     string get_timezone(){return timezone;}
-    void set_earthquakename(string eqn){
+    string set_earthquakename(string eqn){
         earthquakename = eqn;
-        return;
+        return earthquakename;
     }
     string get_eqname(){return earthquakename;}
     void set_epicenter(stringstream ecenter);

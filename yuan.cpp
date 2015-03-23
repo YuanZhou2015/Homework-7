@@ -748,7 +748,7 @@ int main(){
     // If the header read successfully, then open the output file.
     // Print the header information into output file.
 
-    if (flag == 0)
+    //if (flag == 0)
         open_output("yuan.out",outputfile,slog);
     outputfile.close();
     sout = "Header read correctly!\n";

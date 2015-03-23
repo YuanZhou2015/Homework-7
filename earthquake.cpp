@@ -8,7 +8,7 @@
 #include <sstream>
 #include <cstdlib>
 
-void earthquake::printout(ofstream &outputfile, ofstream &logfile,
+void earthquake::printeq(ofstream &outputfile, ofstream &logfile,
            string str,string termina, int &F){
     if (F == 1){
         outputfile.open("yuan.out");
@@ -86,7 +86,7 @@ void earthquake::set_date(string date, stringstream &slog){
         sout = "Invalid date.(Hint: Size should be 10 as 'MM/DD/YYYY or MM-DD-YYYY')\n";
         slog << sout;
         int F = 2;
-        printout(outputfile, logfile, slog.str(), sout, F);
+        printeq(outputfile, logfile, slog.str(), sout, F);
         exit (0);
     }
     if (!isdigit(date[0])||!isdigit(date[1])||!isdigit(date[3])||!isdigit(date[4])
@@ -94,14 +94,14 @@ void earthquake::set_date(string date, stringstream &slog){
         sout = "Invalid date. (Hint: The date should be numbers.)\n";
         slog << sout;
         int F = 2;
-        printout(outputfile, logfile, slog.str(), sout, F);
+        printeq(outputfile, logfile, slog.str(), sout, F);
         exit(0);
     }   
     if((date[2] != '-' || date[5] != '-')&&(date[2] != '/' || date[5] != '/')){
         sout = "Invalid fomat of date.(Hint: MM/DD/YYYY or MM-DD-YYYY)\n";
         slog << sout;
         int F = 2;
-        printout(outputfile,logfile,slog.str(),sout, F);
+        printeq(outputfile,logfile,slog.str(),sout, F);
         exit(0);
     }
     string d1,d2,d3,d4,d5,d6,d7,d8;
@@ -122,14 +122,14 @@ void earthquake::set_date(string date, stringstream &slog){
         sout = "Invalid year.\n";
         slog << sout;
         int F = 2;
-        printout(outputfile,logfile,slog.str(),sout,F);
+        printeq(outputfile,logfile,slog.str(),sout,F);
         exit(0);
     }
     if (m<1 || m>12){
         sout = "Invalid month.(Hint: Month should between 1 to 12.)\n";
         slog << sout;
         int F = 2;
-        printout(outputfile,logfile,slog.str(),sout,F);
+        printeq(outputfile,logfile,slog.str(),sout,F);
         exit(0);
     }
     else{
@@ -139,14 +139,14 @@ void earthquake::set_date(string date, stringstream &slog){
         sout = "Invalid date of the month.\n";
         slog << sout;
         int F = 2;
-        printout(outputfile,logfile,slog.str(),sout,F);
+        printeq(outputfile,logfile,slog.str(),sout,F);
         exit(0);    
     }
     if ((m == 4||m == 6||m == 9||m == 11)&&(d>30 || d<0)){
         sout = "Invalid date of the month.\n";
         slog << sout;
         int F = 2;
-        printout(outputfile,logfile,slog.str(),sout,F);
+        printeq(outputfile,logfile,slog.str(),sout,F);
         exit(0);    
     }
 
@@ -158,7 +158,7 @@ void earthquake::set_date(string date, stringstream &slog){
                 sout = "Invalid date of the month(for Feburary in leadyear).\n";
                 slog << sout;
                 int F = 2;
-                printout(outputfile,logfile,slog.str(),sout,F);
+                printeq(outputfile,logfile,slog.str(),sout,F);
                 exit(0);
             }
         }
@@ -167,7 +167,7 @@ void earthquake::set_date(string date, stringstream &slog){
                 sout = "Invalid date of the month(for Feburary not in leadyear).\n";
                 slog << sout;
                 int F = 2;
-                printout(outputfile,logfile,slog.str(),sout,F);
+                printeq(outputfile,logfile,slog.str(),sout,F);
                 exit(0);
             }
         }
@@ -190,7 +190,7 @@ void earthquake::set_time(string time, stringstream &slog){
         sout = "Invalid format of time.(Hint: Size should be 12 as 'hh:mm:ss.fff')\n";
         slog << sout;
         int F = 2;
-        printout(outputfile,logfile,slog.str(),sout,F);
+        printeq(outputfile,logfile,slog.str(),sout,F);
         exit (0);
     }
     if (!isdigit(time[0])||!isdigit(time[1])
@@ -200,14 +200,14 @@ void earthquake::set_time(string time, stringstream &slog){
         sout = "Invalid time. (Hint: The time should be numbers.)\n";
         slog << sout;
         int F = 2;
-        printout(outputfile,logfile,slog.str(),sout,F);
+        printeq(outputfile,logfile,slog.str(),sout,F);
         exit(0);
     }   
     if(time[2] != ':' || time[5] != ':'||time[8] != '.' ){
         sout = "Invalid fomat of time.(Hint: hh:mm:ss.fff)\n";
         slog << sout;
         int F = 2;
-        printout(outputfile,logfile,slog.str(),sout,F);
+        printoeq(outputfile,logfile,slog.str(),sout,F);
         exit(0);
     }
 
@@ -230,28 +230,28 @@ void earthquake::set_time(string time, stringstream &slog){
         sout = "Invalid hour.\n";
         slog << sout;
         int F = 2;
-        printout(outputfile,logfile,slog.str(),sout,F);
+        printeq(outputfile,logfile,slog.str(),sout,F);
         exit(0);      
     }
     if(m<0||m>59){
         sout = "Invalid minute.\n";
         slog << sout;
         int F = 2;
-        printout(outputfile,logfile,slog.str(),sout,F);
+        printeq(outputfile,logfile,slog.str(),sout,F);
         exit(0);      
     }
     if(s<0||s>59){
         sout = "Invalid second.\n";
         slog << sout;
         int F = 2;
-        printout(outputfile,logfile,slog.str(),sout,F);
+        printeq(outputfile,logfile,slog.str(),sout,F);
         exit(0);      
     }
     if(f<0||f>999){
         sout = "Invalid millisecond.\n";
         slog << sout;
         int F = 2;
-        printout(outputfile,logfile,slog.str(),sout,F);
+        printeq(outputfile,logfile,slog.str(),sout,F);
         exit(0);      
     }
     return;
@@ -259,19 +259,19 @@ void earthquake::set_time(string time, stringstream &slog){
 void earthquake::set_timezone(string tzone, stringstream &slog){
     string sout;
     ofstream outputfile, logfile;
-    if (timezone.size()!=3){
+    if (tzone.size()!=3){
         sout = "Invalid format of timezone.(Hint: Size should be 3.)\n";
         slog << sout;
         int F = 2;
-        printout(outputfile,logfile,slog.str(),sout,F);
+        printouteq(outputfile,logfile,slog.str(),sout,F);
         exit (0);
     }
     else{
-        if (!isalpha(timezone[0])||!isalpha(timezone[1])||!isalpha(timezone[2])){
+        if (!isalpha(tzone[0])||!isalpha(tzone[1])||!isalpha(tzone[2])){
             sout = "Invalid format of timezone. (Hint: The timezone should be 3 chars)\n";
             slog << sout;
             int F = 2;
-            printout(outputfile,logfile,slog.str(),sout,F);
+            printeq(outputfile,logfile,slog.str(),sout,F);
             exit(0);
         }
         else{
@@ -324,16 +324,16 @@ void earthquake::set_magtype(string magnitude, stringstream &slog){
         sout = "Invalid magnitude.\n";
         slog << sout;
         int F = 2;
-        printout(outputfile,logfile,slog.str(),sout,F);
+        printeq(outputfile,logfile,slog.str(),sout,F);
         exit (0);
     }
     else{
-        string ss = uppercase(magnitude);
+        string ss = earthquake::uppercase(magnitude);
         if (ss == "ML") magnitudetype= ML;
         if (ss == "MS") magnitudetype= MS;
         if (ss == "MB") magnitudetype= MB;
         if (ss == "MW") magnitudetype= MW;
-        exit (EXIT_FAILURE);
+        //exit (EXIT_FAILURE);
     }
     return;
 }
@@ -344,7 +344,7 @@ void earthquake::set_magnitude(float mag,stringstream &slog){
         sout =  "Invalid magnitude value.\n";
         slog << sout;
         int F = 2;
-        printout(outputfile,logfile,slog.str(),sout,F);
+        printeq(outputfile,logfile,slog.str(),sout,F);
         exit (0);
     }
     else{
