@@ -54,12 +54,12 @@ public:
         stringstream &ss, int &i, int &flag);
     string get_orientation();
     string set_orientation(string o, int j);
+
 private:
     Network_code NT;
     string STN;
     Band_type B;
     Instrument_type I;
-    string O;
-
+    string O;  
 };
 

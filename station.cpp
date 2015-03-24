@@ -34,14 +34,6 @@ string station::itos(int i){
 bool station::is_valid_network_code(string s){
     return ((s == "CE")||(s == "CI")||(s == "FA")||(s == "NP")||(s == "WR"));
 }
-/*Network_code station::string_to_NTcode(string s){
-    if (s == "CE") return CE;
-    if (s == "CI") return CI;
-    if (s == "FA") return FA;
-    if (s == "NP") return NP;
-    if (s == "WR") return WR;
-    exit(EXIT_FAILURE);
-} */
 string station::NTcode_to_string(Network_code nt){
     switch(nt){
         case CE: return "CE";
@@ -168,13 +160,6 @@ bool station::is_valid_typeofband (string s){
     string ss = uppercase(s);
     return((ss == "LONG-PERIOD")||(ss == "SHORT-PERIOD")||(ss == "BROADBAND"));
 }
-/*Band_type station::string_to_bandtype (string s){
-    string ss = uppercase(s);
-    if (ss == "LONG-PERIOD") return LONGPERIOD;
-    if (ss == "SHORT-PERIOD") return SHORTPERIOD;
-    if (ss == "BROADBAND") return BROADBAND;
-    exit(EXIT_FAILURE);
-}*/   
 string station::bandtype_to_string (Band_type b){
     switch(b){
         case LONGPERIOD: return "L";
@@ -215,14 +200,7 @@ void station::set_typeofband(string &typeofband,stringstream &slog,
 bool station::is_valid_typeofinstru (string s) {
     string ss = uppercase(s);
     return((ss == "HIGH-GAIN")||(ss == "LOW-GAIN")||(ss == "ACCELEROMETER"));
-}
-/*Instrument_type station::string_to_instrutype (string s){
-    string ss = uppercase(s);
-    if (ss == "HIGH-GAIN") return HIGHGAIN;
-    if (ss == "LOW-GAIN") return LOWGAIN;
-    if (ss == "ACCELEROMETER") return ACCELEROMETER;
-    exit(EXIT_FAILURE);
-} */  
+} 
 string station::instrutype_to_string (Instrument_type instr){
     switch(instr){
         case HIGHGAIN: return "H";

@@ -1,9 +1,7 @@
 #include "stdafx.h"
 #include "earthquake.h"
-//#include <stdio.h>
 #include <iostream>
 #include <string>
-//#include <ctype.h>
 #include <fstream>
 #include <sstream>
 #include <cstdlib>
@@ -72,12 +70,6 @@ string months_to_string(Months m){
     }
     exit(EXIT_FAILURE);
 }
-/*struct Date_format{
-    string date;
-    string month;
-    string year;
-};   */
-
 void earthquake::set_date(string date, stringstream &slog){
     string sout;
     ofstream outputfile, logfile;
@@ -295,19 +287,11 @@ bool earthquake::is_valid_magtype(string mt){
     return((ss == "ML")||(ss == "MS")||(ss == "MB")||(ss == "MW"));
 }
 enum Magnitude_type{ 
-        ML, 
-        MS, 
-        MB, 
-        MW 
+    ML, 
+    MS, 
+    MB, 
+    MW 
     };  
-/*Magnitude_type earthquake::string_to_magnitude_type (string s){
-    string ss = uppercase(s);
-    if (ss == "ML") return ML;
-    if (ss == "MS") return MS;
-    if (ss == "MB") return MB;
-    if (ss == "MW") return MW;
-    exit (EXIT_FAILURE);
-}   */
 string earthquake::magtype_to_string(Magnitude_type m){
     switch(m){
         case ML: return "ML";
@@ -333,7 +317,6 @@ void earthquake::set_magtype(string magnitude, stringstream &slog){
         if (ss == "MS") magnitudetype= MS;
         if (ss == "MB") magnitudetype= MB;
         if (ss == "MW") magnitudetype= MW;
-        //exit (EXIT_FAILURE);
     }
     return;
 }

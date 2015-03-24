@@ -21,7 +21,6 @@ public:
     Magnitude_type string_to_magnitude_type (string s);
     void set_ID(string id);
     string get_ID(){return ID;}
-    //Months int_to_months(int m);
     void set_date(string date, stringstream &slog);
     string get_date();
     void set_time(string time, stringstream &slog);
@@ -43,17 +42,10 @@ public:
 
 private:
     struct Date_format{
-    string date;
-    string month;
-    string year;
+        string date;
+        string month;
+        string year;
     }; 
-    /*enum magnitude_type{ 
-        ML, 
-        MS, 
-        MB, 
-        MW 
-    };*/
-
     string ID;
     Date_format Date;
     string time;
