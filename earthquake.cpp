@@ -207,7 +207,7 @@ void earthquake::set_time(string time, stringstream &slog){
         sout = "Invalid fomat of time.(Hint: hh:mm:ss.fff)\n";
         slog << sout;
         int F = 2;
-        printoeq(outputfile,logfile,slog.str(),sout,F);
+        printeq(outputfile,logfile,slog.str(),sout,F);
         exit(0);
     }
 
@@ -263,7 +263,7 @@ void earthquake::set_timezone(string tzone, stringstream &slog){
         sout = "Invalid format of timezone.(Hint: Size should be 3.)\n";
         slog << sout;
         int F = 2;
-        printouteq(outputfile,logfile,slog.str(),sout,F);
+        printeq(outputfile,logfile,slog.str(),sout,F);
         exit (0);
     }
     else{
@@ -308,7 +308,7 @@ enum Magnitude_type{
     if (ss == "MW") return MW;
     exit (EXIT_FAILURE);
 }   */
-string magtype_to_string(Magnitude_type m){
+string earthquake::magtype_to_string(Magnitude_type m){
     switch(m){
         case ML: return "ML";
         case MS: return "MS";

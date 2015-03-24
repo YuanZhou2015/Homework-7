@@ -14,7 +14,7 @@ public:
         MB, 
         MW 
     };
-    void printout(ofstream &outputfile, ofstream &logfile,
+    void printeq(ofstream &outputfile, ofstream &logfile,
     string str,string termina, int &F);
     string uppercase (string &s);
     bool is_valid_magtype(string mt);
@@ -36,8 +36,8 @@ public:
     void set_epicenter(stringstream ecenter);
     string get_epicenter(){return epicenter;}
     void set_magtype(string magnitude, stringstream &slog);
-
-    Magnitude_type get_magtype(){return magnitudetype;}
+    string magtype_to_string(Magnitude_type m);
+    string get_magtype(){return magtype_to_string(magnitudetype);}
     void set_magnitude(float mag,stringstream &slog);
     float get_magnitude(){return magnitude;}
 

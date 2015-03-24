@@ -53,9 +53,8 @@ public:
     void set_orientation(string orientation,stringstream &slog,
         stringstream &ss, int &i, int &flag);
     string get_orientation();
-    string get_orientation(string o, int j);
+    string set_orientation(string o, int j);
 private:
-
     Network_code NT;
     string STN;
     Band_type B;

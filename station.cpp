@@ -342,7 +342,7 @@ void station::set_orientation(string orientation,stringstream &slog,
 string station::get_orientation(){
     return O;
 }
-string station::get_orientation(string o, int j){
-    o = O[j];
+string station::set_orientation(string o, int j){
+    O = o[j];
     return O;
 }

@@ -761,7 +761,7 @@ int main(){
     ss << eqinfor.get_time ()<< ' ' << eqinfor.get_timezone() << ' ';
     ss << eqinfor.get_magtype() << ' ' << eqinfor.get_magnitude() << ' ';
     ss << eqinfor.get_eqname() << "\n";
-    ss << "[" << eqinfor.get_ID() <<"] ";
+    ss << "[" << eqinfor.get_ID() <<"] \n";
     ss << eqinfor.get_epicenter();
     F = 1;
     print(outputfile,logfile,ss.str(),sout,F);
@@ -791,23 +791,30 @@ int main(){
         int n = orientation.size(), j = 0;
         if(flag1 == 0 && flag2 == 0 && flag3 == 0 && flag4 == 0 && flag5 == 0){
             while (j<n){
-                if (j>= 1){
-                     string nttemp = Signaldata[size-1].get_networkcode();
-                     Signaldata[size].get_networkcode() = nttemp;
-                     string nntemp = Signaldata[size-1].get_stationname();
+                if (j>0){
+                     Signaldata[size].set_networkcode(networkcode,slog,ss,i,flag1);
+                     Signaldata[size].set_stationname(stname,slog,ss,i,flag2);
+                     Signaldata[size].set_typeofband(typeofband,slog,ss,i,flag3);
+                     Signaldata[size].set_typeofinstru(typeofinstru,slog,ss,i,flag4);
+                     Signaldata[size].set_orientation(orien, j);
+                     //string nttemp = Signaldata[size-1].get_networkcode();
+                     //Signaldata[size].get_networkcode() = nttemp;
+                    /* string nntemp = Signaldata[size-1].get_stationname();
                      Signaldata[size].get_stationname() = nntemp;
                      string btemp = Signaldata[size-1].get_bandtype();
                      Signaldata[size].get_bandtype() = btemp;
+                     string itemp = Signaldata[size-1].get_instrutype();
+                     Signaldata[size].get_instrutype() = itemp;   */ 
                 }
                 else{
                 Signaldata[size].get_networkcode();
                 Signaldata[size].get_stationname();
                 Signaldata[size].get_bandtype();
                 Signaldata[size].get_instrutype();
-                Signaldata[size].get_orientation(orien, j);
+                Signaldata[size].set_orientation(orien, j);
                 }
 
-                //size++;
+                size++;
                 j++;
                 /*if (size == 300)
                     break;   */
@@ -844,7 +851,7 @@ int main(){
     print(outputfile, logfile,ss.str(),sout,F);     
     for (int j = 0; j<size; j++){
         ss << eqinfor.get_ID() << "." << Signaldata[j].get_networkcode() << "." << Signaldata[j].get_stationname() << "." 
-           << Signaldata[j].get_bandtype() << Signaldata[j].get_instrutype();// << Signaldata[j].O <<"\n"; 
+           << Signaldata[j].get_bandtype() << Signaldata[j].get_instrutype() << Signaldata[j].get_orientation() <<"\n"; 
     }
     F = 1;
     print(outputfile,logfile,ss.str(),sout,F); 
