@@ -5,15 +5,34 @@
 
 using namespace std;
 
-class earthquake
-{
+enum Magnitude_type{ 
+    ML, 
+    MS, 
+    MB, 
+    MW 
+};
+struct Date_format{
+    string date;
+    string month;
+    string year;
+};
+enum Months{
+    January = 1,
+    February,
+    March,
+    April,
+    May,
+    June,
+    July,
+    Auguest,
+    September,
+    October,
+    November,
+    December
+};
+
+class earthquake{
 public:
-    enum Magnitude_type{ 
-        ML, 
-        MS, 
-        MB, 
-        MW 
-    };
     void printeq(ofstream &outputfile, ofstream &logfile,
     string str,string termina, int &F);
     string uppercase (string &s);
@@ -40,12 +59,7 @@ public:
     void set_magnitude(float mag,stringstream &slog);
     float get_magnitude(){return magnitude;}
 
-private:
-    struct Date_format{
-        string date;
-        string month;
-        string year;
-    }; 
+private: 
     string ID;
     Date_format Date;
     string time;

@@ -195,22 +195,19 @@ int main(){
         inputfile >> orientation;
         Signaldata[size].set_orientation(orientation,slog,ss,i,flag5);
         orien = Signaldata[size].get_orientation();
-        int n = orientation.size(), j = 0;
+        int n = (int)orientation.size(), j = 0;
         if(flag1 == 0 && flag2 == 0 && flag3 == 0 && flag4 == 0 && flag5 == 0){
             while (j<n){
-                if (j>0){
-                     Signaldata[size].set_networkcode(networkcode,slog,ss,i,flag1);
-                     Signaldata[size].set_stationname(stname,slog,ss,i,flag2);
-                     Signaldata[size].set_typeofband(typeofband,slog,ss,i,flag3);
-                     Signaldata[size].set_typeofinstru(typeofinstru,slog,ss,i,flag4);
-                     Signaldata[size].set_orientation(orien, j);
-                }
+                Signaldata[size].set_networkcode(networkcode,slog,ss,i,flag1);
+                Signaldata[size].set_stationname(stname,slog,ss,i,flag2);
+                Signaldata[size].set_typeofband(typeofband,slog,ss,i,flag3);
+                Signaldata[size].set_typeofinstru(typeofinstru,slog,ss,i,flag4);
+                Signaldata[size].set_orientation(orien, j);
                 size++;
                 j++;
             }
         }
-        if(flag1 != 0 || flag2 != 0 || flag3 != 0 || flag4 != 0 || flag5 != 0)
-            a++;    
+        else a++;
     }
 
     // Generat the report for total information read.

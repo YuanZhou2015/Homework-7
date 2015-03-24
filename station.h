@@ -5,26 +5,26 @@
 
 using namespace std;
 
-class station
-{
+enum Network_code{
+    CE,
+    CI,
+    FA,
+    NP,
+    WR
+};
+enum Band_type{
+    LONGPERIOD,
+    SHORTPERIOD,
+    BROADBAND
+};
+enum Instrument_type{
+    HIGHGAIN,
+    LOWGAIN,
+    ACCELEROMETER
+    };
+
+class station{
 public:
-    enum Network_code{
-        CE,
-        CI,
-        FA,
-        NP,
-        WR
-    };
-    enum Band_type{
-        LONGPERIOD,
-        SHORTPERIOD,
-        BROADBAND
-    };
-    enum Instrument_type{
-        HIGHGAIN,
-        LOWGAIN,
-        ACCELEROMETER
-    };
     void printst(ofstream &outputfile, ofstream &logfile,
         string str,string termina, int &F);
     string uppercase (string &s);

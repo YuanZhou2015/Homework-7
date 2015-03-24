@@ -24,20 +24,6 @@ void earthquake::set_ID(string id){
     earthquake::ID = id;
     return;
 }
-enum Months{
-    January = 1,
-    February,
-    March,
-    April,
-    May,
-    June,
-    July,
-    Auguest,
-    September,
-    October,
-    November,
-    December
-};
 Months int_to_months(int m){
     if (m == 1) return January;
     if (m == 2) return February;
@@ -285,13 +271,7 @@ string earthquake::uppercase (string &s){
 bool earthquake::is_valid_magtype(string mt){
     string ss = uppercase(mt);
     return((ss == "ML")||(ss == "MS")||(ss == "MB")||(ss == "MW"));
-}
-enum Magnitude_type{ 
-    ML, 
-    MS, 
-    MB, 
-    MW 
-    };  
+} 
 string earthquake::magtype_to_string(Magnitude_type m){
     switch(m){
         case ML: return "ML";
