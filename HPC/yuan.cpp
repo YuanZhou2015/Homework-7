@@ -8,6 +8,7 @@
 * By Yuan Zhou
 * March/21/2015
  */
+
 #include "earthquake.h"
 #include "station.h" 
 #include <stdio.h>
@@ -40,9 +41,9 @@ void open_log(string logfilename, ofstream &logfile){
     ofstream outputfile;
     logfile.open(logfilename.c_str());
     if (!logfile.is_open()){
-        cout<< "Cannot open log file: "
-            << logfilename
-            << endl;
+        cout << "Cannot open log file: "
+             << logfilename
+             << endl;
         return;
     }
 }
@@ -89,6 +90,8 @@ void open_output(string outputfilename, ofstream &outputfile, stringstream &slog
     }
 }
 
+// A function transfer int to string.
+
 string itos(int i){
     stringstream s;
     s << i;
@@ -101,14 +104,14 @@ int main(){
     string inputfilename, logfilename, outputfilename;
     string sout, d, information;
     stringstream slog;
-    int flag=0,F;
+    int flag = 0,F;
     open_log("yuan.log",logfile);
     logfile.close();
     sout = "> Enter input file name: ";
     F = 2;
     print(outputfile,logfile,slog.str(),sout,F);
     cin >> inputfilename;
-    if (flag ==1)
+    if (flag == 1)
     return 0;
     sout = "Opening file: ";
     slog << sout;
@@ -175,8 +178,8 @@ int main(){
     // The number of valid information will not more than 300.
 
     const int MAXSIZE = 300;
-    station signal,Signaldata[MAXSIZE];
-    int size = 0, i, a = 0, flag1 = 0,flag2 = 0,flag3 = 0,flag4 = 0,flag5 = 0;
+    station Signaldata[MAXSIZE];
+    int size = 0, i, a = 0, flag1 = 0,flag2 = 0,flag3 = 0,flag4 = 0,flag5 = 0, m=0;
     string networkcode, stname, typeofband, typeofinstru, orientation,orien;
 
     for(i = 1;inputfile != NULL && size<MAXSIZE; i++){
@@ -204,6 +207,7 @@ int main(){
                 size++;
                 j++;
             }
+            m++;
         }
         else a++;
     }
@@ -220,7 +224,7 @@ int main(){
     sout = "\nTotal valid entries read: ";
     slog << sout;
     print(outputfile,logfile,slog.str(),sout,F);
-    sout = itos(i-a-1);
+    sout = itos(m);
     slog << sout; 
     print(outputfile,logfile,slog.str(),sout,F);
     sout = "\nSignal names produced: ";
@@ -232,7 +236,7 @@ int main(){
     F = 1;
     sout = '\0';
     ss << itos(size) <<"\n";
-    print(outputfile, logfile,ss.str(),sout,F);     
+    print(outputfile,logfile,ss.str(),sout,F);     
     for (int j = 0; j<size; j++){
         ss << eqinfor.get_ID() << "." << Signaldata[j].get_networkcode() << "." << Signaldata[j].get_stationname() << "." 
            << Signaldata[j].get_bandtype() << Signaldata[j].get_instrutype() << Signaldata[j].get_orientation() <<"\n"; 

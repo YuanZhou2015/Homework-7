@@ -93,7 +93,7 @@ string station::get_networkcode(){
     return NTcode_to_string(NT);
 }
 void station::set_stationname(string stationname,stringstream &slog,
-                     stringstream &ss, int &i, int &flag){
+    stringstream &ss, int &i, int &flag){
     string sout;
     ofstream outputfile, logfile;
     int F;
@@ -168,7 +168,7 @@ string station::bandtype_to_string (Band_type b){
     exit(EXIT_FAILURE);
 }
 void station::set_typeofband(string &typeofband,stringstream &slog,
-                    stringstream &ss, int &i, int flag){
+    stringstream &ss, int &i, int flag){
     string sout;
     ofstream outputfile, logfile;
     int F;
@@ -209,7 +209,7 @@ string station::instrutype_to_string (Instrument_type instr){
     exit(EXIT_FAILURE);
 }
 void station::set_typeofinstru(string &typeofinstru,stringstream &slog, 
-                      stringstream &ss, int&i, int &flag){
+    stringstream &ss, int&i, int &flag){
     string sout;
     ofstream outputfile, logfile;
     int F;
@@ -238,7 +238,7 @@ void station::set_typeofinstru(string &typeofinstru,stringstream &slog,
     return;
 }
 void station::set_orientation(string orientation,stringstream &slog,
-                     stringstream &ss, int &i, int &flag){
+    stringstream &ss, int &i, int &flag){
     string sout;
     ofstream outputfile, logfile;
     int F,n,j;
